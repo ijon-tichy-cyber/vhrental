@@ -15,6 +15,10 @@ class VhRentalScanModuleFrontController extends ModuleFrontController
             $this->json(['ok' => false, 'error' => 'Unauthorized'], 401);
         }
 
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->json(['ok' => false, 'error' => 'Użyj metody POST.'], 405);
+        }
+        
         $box = Tools::getValue('box');
         if (!$box) {
             $this->json(['ok' => false, 'error' => 'Brak parametru box.'], 400);
